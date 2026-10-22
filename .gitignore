@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+data/
+appsettings.*.local.json
+
+# Visual Studio / Rider / тесты
+*.suo
+*.userprefs
+[Dd]ebug/
+[Rr]elease/
+TestResults/
+*.trx
+*.log

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="..\LeadBot.Application\LeadBot.Application.csproj" />
+    <ProjectReference Include="..\LeadBot.Infrastructure\LeadBot.Infrastructure.csproj" />
+    <ProjectReference Include="..\LeadBot.Channels.Telegram\LeadBot.Channels.Telegram.csproj" />
+    <ProjectReference Include="..\LeadBot.Channels.Max\LeadBot.Channels.Max.csproj" />
+    <ProjectReference Include="..\LeadBot.Crm.AmoCrm\LeadBot.Crm.AmoCrm.csproj" />
+    <ProjectReference Include="..\LeadBot.Llm.Anthropic\LeadBot.Llm.Anthropic.csproj" />
+    <!-- Prod-хранилище: раскомментируйте после restore пакетов EF Core
+    <ProjectReference Include="..\LeadBot.Persistence.Postgres\LeadBot.Persistence.Postgres.csproj" />
+    -->
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="prompts\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
