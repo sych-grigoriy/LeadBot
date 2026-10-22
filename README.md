@@ -2,6 +2,7 @@
 
 ИИ-бот, который сам ведёт лидов по воронке в Telegram (включая Telegram Business) и MAX и синхронизирует их с amoCRM. Каркас на .NET 10 / ASP.NET Core.
 
+Пошаговая настройка перед первым запуском — в [docs/SETUP.md](docs/SETUP.md).
 Архитектура, воронка, настройка каналов и amoCRM — в [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Структура
