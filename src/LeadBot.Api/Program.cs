@@ -5,6 +5,7 @@ using LeadBot.Channels.Telegram;
 using LeadBot.Crm.AmoCrm;
 using LeadBot.Infrastructure;
 using LeadBot.Llm.Anthropic;
+using LeadBot.Llm.DeepSeek;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -15,9 +16,17 @@ builder.Services
     .AddTelegramChannel(config)
     .AddMaxChannel(config)
     .AddAmoCrm(config)
-    .AddAnthropicLlm(config)
     // Prod: .AddPostgresPersistence(config) — до AddLeadBotInfrastructure
     .AddLeadBotInfrastructure(config);
+
+// LLM-провайдер: Llm:Provider = DeepSeek | Anthropic
+var llmProvider = config.GetValue("Llm:Provider", "DeepSeek")!;
+if (llmProvider.Equals("Anthropic", StringComparison.OrdinalIgnoreCase))
+    builder.Services.AddAnthropicLlm(config);
+else if (llmProvider.Equals("DeepSeek", StringComparison.OrdinalIgnoreCase))
+    builder.Services.AddDeepSeekLlm(config);
+else
+    throw new InvalidOperationException($"Неизвестный Llm:Provider '{llmProvider}'. Допустимо: DeepSeek, Anthropic.");
 
 // Если amoCRM выключена — CRM-команды просто логируются.
 if (!config.GetValue("AmoCrm:Enabled", true))

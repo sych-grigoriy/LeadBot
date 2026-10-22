@@ -18,6 +18,8 @@ public abstract record LlmContent;
 public sealed record LlmText(string Text) : LlmContent;
 public sealed record LlmToolUse(string Id, string Name, JsonElement Input) : LlmContent;
 public sealed record LlmToolResult(string ToolUseId, string Content, bool IsError = false) : LlmContent;
+/// <summary>Рассуждения модели (DeepSeek thinking mode) — клиенту не показываются, но провайдер может требовать вернуть их обратно.</summary>
+public sealed record LlmReasoning(string Text) : LlmContent;
 
 public sealed record LlmMessage(LlmRole Role, IReadOnlyList<LlmContent> Content)
 {

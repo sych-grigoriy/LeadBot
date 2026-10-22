@@ -78,7 +78,7 @@ public sealed class AnthropicLlmClient(HttpClient http, IOptions<AnthropicOption
     private static JsonNode ToJson(LlmMessage m) => new JsonObject
     {
         ["role"] = m.Role == LlmRole.User ? "user" : "assistant",
-        ["content"] = new JsonArray(m.Content.Select(c => (JsonNode?)(c switch
+        ["content"] = new JsonArray(m.Content.Where(c => c is not LlmReasoning).Select(c => (JsonNode?)(c switch
         {
             LlmText t => new JsonObject { ["type"] = "text", ["text"] = t.Text },
             LlmToolUse u => new JsonObject

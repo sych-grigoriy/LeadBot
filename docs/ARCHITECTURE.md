@@ -54,7 +54,8 @@ flowchart LR
 | `LeadBot.Channels.Telegram` | Bot API: Business-сообщения, личка, группы, кнопки владельца, регистрация вебхука. |
 | `LeadBot.Channels.Max` | MAX Bot API (`platform-api.max.ru`): диалоги, групповые чаты, `bot_started`, подписка на вебхук. |
 | `LeadBot.Crm.AmoCrm` | API v4: сделка и контакт (`/leads/complex`), примечания, задачи, OAuth или долгосрочный токен, приём вебхуков смены статуса. |
-| `LeadBot.Llm.Anthropic` | Реализация `ILlmClient` (Messages API + tool use). |
+| `LeadBot.Llm.DeepSeek` | Реализация `ILlmClient` для DeepSeek (Chat Completions в формате OpenAI + function calling). Провайдер по умолчанию. Режим рассуждений выключен: с инструментами DeepSeek требует возвращать `reasoning_content` всех прошлых ходов. |
+| `LeadBot.Llm.Anthropic` | Реализация `ILlmClient` (Messages API + tool use). Включается `Llm:Provider = Anthropic`. |
 | `LeadBot.Infrastructure` | InMemory-репозиторий, календарь рабочих часов, системные часы, лог-уведомления. |
 | `LeadBot.Persistence.Postgres` | EF Core + Npgsql: таблица `leads`, профиль, идентичность и история в `jsonb`. |
 | `LeadBot.Api` | Хост ASP.NET Core: вебхуки `/webhooks/telegram`, `/webhooks/max`, `/webhooks/amocrm/{secret}`, `/health`. |
@@ -207,5 +208,5 @@ dotnet run --project src/LeadBot.Api
 **Безопасность и право:**
 - Секреты хранить в user-secrets или переменных окружения, не в `appsettings.json`.
 - Вебхуки проверяют секрет в заголовке или URL.
-- Персональные данные клиентов из РФ — 152-ФЗ: хранить на сервере в РФ, иметь политику обработки ПД. История диалога уходит в LLM-провайдера — учтите это в политике. При необходимости используйте провайдера с размещением в РФ (GigaChat, YandexGPT) через свою реализацию `ILlmClient`.
+- Персональные данные клиентов из РФ — 152-ФЗ: хранить на сервере в РФ, иметь политику обработки ПД. История диалога уходит в LLM-провайдера — учтите это в политике. DeepSeek обрабатывает данные на серверах в Китае — для персональных данных из РФ это трансграничная передача. Если это критично, используйте провайдера с размещением в РФ (GigaChat, YandexGPT) через свою реализацию `ILlmClient`.
 - Бот честно говорит, что он ИИ-ассистент, если его прямо спросят.

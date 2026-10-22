@@ -6,6 +6,7 @@
     <ProjectReference Include="..\LeadBot.Channels.Max\LeadBot.Channels.Max.csproj" />
     <ProjectReference Include="..\LeadBot.Crm.AmoCrm\LeadBot.Crm.AmoCrm.csproj" />
     <ProjectReference Include="..\LeadBot.Llm.Anthropic\LeadBot.Llm.Anthropic.csproj" />
+    <ProjectReference Include="..\LeadBot.Llm.DeepSeek\LeadBot.Llm.DeepSeek.csproj" />
     <!-- Prod-хранилище: раскомментируйте после restore пакетов EF Core
     <ProjectReference Include="..\LeadBot.Persistence.Postgres\LeadBot.Persistence.Postgres.csproj" />
     -->

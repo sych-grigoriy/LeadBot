@@ -13,6 +13,7 @@ src/
   LeadBot.Channels.Telegram      Bot API: Business, личка, группы, уведомления владельцу
   LeadBot.Channels.Max           MAX Bot API
   LeadBot.Crm.AmoCrm             amoCRM API v4 + вебхук смены статуса
+  LeadBot.Llm.DeepSeek           ILlmClient для DeepSeek (OpenAI-совместимый API) — по умолчанию
   LeadBot.Llm.Anthropic          ILlmClient для Anthropic Messages API
   LeadBot.Infrastructure         InMemory-хранилище, календарь, часы
   LeadBot.Persistence.Postgres   EF Core + Npgsql (prod)
@@ -23,8 +24,8 @@ tests/
 
 ## Быстрый старт
 
-1. Создайте бота в @BotFather и включите ему Business Mode (Bot Settings → Business Mode).
-2. Заполните секреты: `Telegram:BotToken`, `Telegram:BotUsername`, `Telegram:WebhookSecret`, `Telegram:PublicBaseUrl`, `Telegram:OwnerChatId`, `Llm:Anthropic:ApiKey`, `Llm:Anthropic:Model`.
+1. Создайте бота в @BotFather и включите ему Secretary Mode (Bot Settings → Secretary Mode; раньше назывался Business Mode).
+2. Заполните секреты: `Telegram:BotToken`, `Telegram:BotUsername`, `Telegram:WebhookSecret`, `Telegram:PublicBaseUrl`, `Telegram:OwnerChatId`, `Llm:DeepSeek:ApiKey` (провайдер выбирается в `Llm:Provider`: `DeepSeek` или `Anthropic`).
 3. Заполните `src/LeadBot.Api/prompts/company.md`: услуги, ориентиры цен, реальные кейсы.
 4. `dotnet run --project src/LeadBot.Api`. Вебхук Telegram зарегистрируется сам.
 5. В Telegram: Настройки → Telegram для бизнеса → Чат-боты → ваш бот.
